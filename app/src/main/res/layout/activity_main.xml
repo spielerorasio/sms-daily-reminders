@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/scheduleBtn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#f47d42"
+        android:text="הפעל תזכורות יומי"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/stopScheduleBtn"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="#f47d42"
+        android:text="עצור תזכורות יומי"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/send4tomorrow"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:background="#f47d42"
+        android:text="שלח עבור מחר"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/send4today"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:background="#f47d42"
+        android:text="שלח עבור היום"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/contentMessageLayout"
+        android:layout_width="92dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="300dp"
+        android:text="תוכן ההודעה"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/contentMessage"
+        app:layout_constraintTop_toBottomOf="@+id/send4today"
+        android:layout_marginTop="16dp"
+          />
+
+
+    <EditText
+        android:id="@+id/contentMessage"
+        android:layout_width="229dp"
+        android:layout_height="86dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="זוהי תזכורת אוטומטית:נקבע טיפול פיזיותרפיה"
+        android:textDirection="rtl"
+        app:layout_constraintTop_toBottomOf="@+id/send4today"
+        app:layout_constraintRight_toLeftOf="@+id/contentMessageLayout"
+        tools:text="זוהי תזכורת אוטומטית,נקבע טיפול פיזיותרפיה ב" />
+
+
+    <TextView
+        android:id="@+id/timeLayout"
+        android:layout_width="246dp"
+        android:layout_height="18dp"
+        android:text="שעה ביום בו תישלח ההודעה"
+        android:layout_marginEnd="140dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginRight="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/time"
+        app:layout_constraintTop_toBottomOf="@+id/contentMessageLayout"
+         />
+
+
+
+
+
+    <EditText
+        android:id="@+id/time"
+        android:layout_width="112dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="time"
+        android:text="20:45"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/timeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/contentMessage"
+        tools:text="20:45" />
+
+
+
+
+
+    <TextView
+        android:id="@+id/contentReportLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="16dp"
+        android:text="דוח ישלח למספר"
+        app:layout_constraintTop_toBottomOf="@+id/timeLayout"
+        android:layout_marginEnd="280dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
+
+
+    <EditText
+        android:id="@+id/contentReport"
+        android:layout_width="229dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="0528677908"
+        android:textDirection="rtl"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/time"
+        app:layout_constraintRight_toLeftOf="@+id/contentReportLayout"
+        tools:text="0545900855" />
+
+
+
+    <Button
+        android:id="@+id/reportOnly"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+        android:background="#f47d42"
+        app:layout_constraintTop_toBottomOf="@+id/contentReportLayout"
+        android:text="הצג ללא שליחה"
+        android:layout_marginLeft="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+         />
+
+    <Button
+        android:id="@+id/emailReport"
+        android:layout_width="151dp"
+        android:layout_height="wrap_content"
+         android:background="#f47d42"
+        app:layout_constraintTop_toBottomOf="@+id/contentReport"
+        android:text="שלח במייל דוח"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+         />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+
+</android.support.constraint.ConstraintLayout>
