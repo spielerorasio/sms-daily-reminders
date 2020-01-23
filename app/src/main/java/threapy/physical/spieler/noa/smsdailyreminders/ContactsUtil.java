@@ -26,7 +26,9 @@ public class ContactsUtil {
         permissionUtil.getUserPermission(PermissionUtil.MY_PERMISSIONS_REQUEST_READ_CONTACTS, Manifest.permission.READ_CONTACTS);
 
         List<ContactPerson> contacts = new ArrayList<>();
-        String[] columns = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.HAS_PHONE_NUMBER,ContactsContract.RawContacts.ACCOUNT_TYPE};
+        String[] columnsAccount = {ContactsContract.RawContacts.CONTACT_ID, ContactsContract.RawContacts.ACCOUNT_TYPE};
+
+        String[] columns = {ContactsContract.Contacts._ID, ContactsContract.Contacts.DISPLAY_NAME, ContactsContract.Contacts.HAS_PHONE_NUMBER};
         String selection = "DISPLAY_NAME LIKE  '%" + containsStr.replace("'","") ;
         if(selection!=null){
             selection += "%' AND DISPLAY_NAME LIKE  '%" + containsStr2 + "%'";
@@ -37,16 +39,22 @@ public class ContactsUtil {
         int indexId = cursor.getColumnIndex(ContactsContract.Contacts._ID);
         int displayName = cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME);
         int hasPhoneNumber = cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER);
-        int accountType = cursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE);
 
         while(cursor.moveToNext()) {
             String id = cursor.getString(indexId);
             String name = cursor.getString(displayName);
             String has_phone = cursor.getString(hasPhoneNumber);
-            String account_type = cursor.getString(accountType);
+            boolean isGoogle = false;
+            Cursor rawContactsCursor = contentResolver.query(ContactsContract.RawContacts.CONTENT_URI, columnsAccount, "_id="+id, null, null);
+            while(rawContactsCursor.moveToNext()) {
+                int accountType = rawContactsCursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE);
+                String account_type = rawContactsCursor.getString(accountType);
+                isGoogle = GOOGLE_ACCOUNT.equals(account_type);
+            }
+
 
 //            System.out.println(name);
-            if(! has_phone.endsWith("0")  && GOOGLE_ACCOUNT.equals(account_type))  {
+            if(! has_phone.endsWith("0")  && isGoogle)  {
                 ContactPerson contact = getContactDetails(id);
                 if(contact!=null){
                     contact.setName(name);
