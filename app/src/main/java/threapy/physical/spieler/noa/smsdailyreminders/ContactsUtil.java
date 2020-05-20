@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsUtil {
+    private static final String TACHYON_ACCOUNT = "com.google.android.apps.tachyon";
     private static final String GOOGLE_ACCOUNT = "com.google";
+    private static final String WHATSAPP_ACCOUNT = "com.whatsapp";
     private PermissionUtil permissionUtil;
     private  ContentResolver contentResolver;
 
@@ -45,16 +47,22 @@ public class ContactsUtil {
             String name = cursor.getString(displayName);
             String has_phone = cursor.getString(hasPhoneNumber);
             boolean isGoogle = false;
+            boolean isWhatsapp = false;
             Cursor rawContactsCursor = contentResolver.query(ContactsContract.RawContacts.CONTENT_URI, columnsAccount, "_id="+id, null, null);
+            if(rawContactsCursor.getCount()==0){
+                isGoogle = true;
+            }
             while(rawContactsCursor.moveToNext()) {
                 int accountType = rawContactsCursor.getColumnIndex(ContactsContract.RawContacts.ACCOUNT_TYPE);
                 String account_type = rawContactsCursor.getString(accountType);
-                isGoogle = GOOGLE_ACCOUNT.equals(account_type);
+                isGoogle = GOOGLE_ACCOUNT.equals(account_type) || TACHYON_ACCOUNT.equals(account_type);
+                isWhatsapp = WHATSAPP_ACCOUNT.equals(account_type);
             }
 
 
 //            System.out.println(name);
-            if(! has_phone.endsWith("0")  && isGoogle)  {
+//            if(! has_phone.endsWith("0") )  {
+            if(! has_phone.endsWith("0")  && (isGoogle || isWhatsapp))  {
                 ContactPerson contact = getContactDetails(id);
                 if(contact!=null){
                     contact.setName(name);
